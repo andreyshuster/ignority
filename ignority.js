@@ -11,12 +11,14 @@ var ignores = [];
 for (var i=0; i<args.length; i++) {
     if (args[i].toLowerCase() == 'emacs') {
         ignores.push('*~');
+        console.log('Adding Emacs');
     }
     if (args[i].toLowerCase() == 'node') {
         ignores.push('node_modules');
+        console.log("Adding Node modules folder");
     }
 } 
-console.log(ignores);
+
 if (ignores.length == 0) {
     console.log('No items added');
     process.exit(0);
