@@ -31,6 +31,11 @@ for (var i=0; i<args.length; i++) {
         ignores.push('node_modules');
         console.log("node_modules");
     }
+
+    if (args[i].toLowerCase() == 'macos') {
+        ignores.push('.DS_Store');
+        console.log(".DS_Store");
+    }
 } 
 
 if (scan_folder) {
@@ -52,17 +57,13 @@ if (scan_folder) {
             if (/npm-debug.log/i.test(file)) {
                 console.log(file, '(Npm debug log)');
             }
-            // console.log("%s (%s) (%s)", file, path.extname(file),
-            //             is_file ? "File" : "Directory");
+            if (/\.DS_Store/.test(file)) {
+                console.log(file, '(Macos system files)');
+            }
         });
     });
     
 }
-
-// if (ignores.length == 0) {
-//     console.log('No items added');
-//     process.exit(0);
-// }
 
 if (save_to_file) {
     fs.writeFile(".gitignore", ignores.join("\n"), function(err) {
